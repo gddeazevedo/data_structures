@@ -1,11 +1,19 @@
 # Estruturas de Dados em C
 
+<h2>
+Tópicos
+
+- [1 - Pilhas](#1---pilhas)
+- [2 - Filas](#2---filas)
+- [3 - Listas Encadeadas](#3---listas-encadeadas)
+
+</h2>
 
 ## 1 - Pilhas
 
 - Seguem o princípio LIFO (Last In First Out)
 - Inserções (push) e deleções (pop) ocorrem no final da pilha
-### Funções:
+### [Funções](./src/stack/stack.h):
 
 ```c
 typedef struct {
@@ -21,14 +29,14 @@ bool is_empty(Stack* stack);        // Retorna true se a pilha estiver vazia e f
 Stack* new_Stack();                 // Retorna um ponteiro para uma pilha
 ```
 
-## Filas
+## 2 - Filas
 
 - Seguem o princípio FIFO (First In First Out)
 - Inserções (enqueue) ocorrem no final da fila e deleções (dequeue) ocorrem no início da fila
 - Filas com vetor possuem caráter circular, ou seja para determinar onde se insere um item se usa aritmética modular:
 ```tail = tail % max_size + 1;```
 - Para que a fórmula acima funcione, é preciso que o primeiro índice seja o 1
-### Funções:
+### [Funções](./src/queue/queue.h):
 
 ```c
 typedef struct {
@@ -45,13 +53,13 @@ int dequeue(Queue* queue);                 // Remove um elemento no início da f
 void print_queue(Queue* queue);            // Mostra os elementos da fila
 ```
 
-## Listas encadeadas
+## 3 - Listas encadeadas
 
 - Armazena elementos de forma não contígua
 - Lista composta de nós, cada nó armazena um valor e um ponteiro para o próximo nó na lista
 - Pode se inserir elementos onde desejar, porém inserções no início possuem complexidade O(1) e inserções no final possuem complexidade O(n)
 
-### Funções:
+### [Funções](./src/linked_list/linked_list.h):
 
 ```c
 typedef struct __node {
