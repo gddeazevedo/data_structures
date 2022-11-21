@@ -49,12 +49,17 @@ void push_back(LinkedList* list, int value) {
 }
 
 int pop_front(LinkedList* list) {
-    Node* aux = list->head;
-    list->head = list->head->next;
-    aux->next = NULL;
-    int value = aux->data;
-    free(aux);
-    return value;
+    if (list->head != NULL) {
+        Node* aux = list->head;
+        list->head = list->head->next;
+        aux->next = NULL;
+        int value = aux->data;
+        free(aux);
+        return value;
+    }
+
+    printf("List is empty!\n");
+    return -1000000;
 }
 
 int pop_back(LinkedList* list) {

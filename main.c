@@ -1,4 +1,4 @@
-#include "src/linked_list/linked_list.h"
+#include "src/stack/stack.h"
 
 
 void main() {
