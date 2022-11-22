@@ -7,11 +7,6 @@ LinkedList* new_List() {
 }
 
 void print_list(LinkedList* list) {
-    if (list->head == NULL) {
-        printf("[]\n");
-        return;
-    }
-
     Node* aux = list->head;
 
     printf("[ ");
@@ -19,7 +14,6 @@ void print_list(LinkedList* list) {
         printf("%d ", aux->data);
         aux = aux->next;
     }
-
     printf("]\n");
 }
 
@@ -199,5 +193,11 @@ void invert(LinkedList* list) {
     while (current != NULL) {
         current->data = pop(stack);
         current = current->next;
+    }
+}
+
+void empty_list(LinkedList* list) {
+    while (list->head != NULL) {
+        pop_front(list);
     }
 }

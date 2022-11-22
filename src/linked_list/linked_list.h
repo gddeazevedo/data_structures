@@ -26,5 +26,6 @@ void remove_in_order(LinkedList* list, int value);
 void insert_in_order(LinkedList* list, int value);
 SearchContent* search(LinkedList* list, int value);
 void invert(LinkedList* list);
+void empty_list(LinkedList* list);
 
 #endif

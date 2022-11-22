@@ -6,11 +6,13 @@
 void main() {
     LinkedList* list = new_List();
 
-    for (int i = 0; i < 11; i++) {
-        push_front(list, i);
-    }
+    push_front(list, 1);
+    push_front(list, 2);
+    push_front(list, 4);
+    print_list(list);
 
     invert(list);
+    // empty_list(list);
 
     print_list(list);
 }
