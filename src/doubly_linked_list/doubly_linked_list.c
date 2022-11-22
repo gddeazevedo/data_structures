@@ -81,8 +81,17 @@ void d_remove(DoublyLinkedList* list, int value) {
         return;
     }
 
-    current->next->prev = current->prev;
-    current->prev->next = current->next;
+    if (current == list->head) {
+        dpop_front(list);
+        return;
+    }
+
+    if (current->next != NULL)
+        current->next->prev = current->prev;
+
+    if (current->prev != NULL)
+        current->prev->next = current->next;
+
     current->prev = NULL;
     current->next = NULL;
     free(current);
