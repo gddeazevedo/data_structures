@@ -90,7 +90,29 @@ int pop_back(LinkedList* list) {
 }
 
 void remove_element(LinkedList* list, int value) {
-    
+    Node* current = list->head;
+    Node* aux = list->head;
+
+    while (current != NULL && current->data != value) {
+        aux = current;
+        current = current->next;
+    }
+
+    if (current == NULL) {
+        printf("Value not found!\n");
+        return;
+    }
+
+    if (current == list->head) {
+        pop_front(list);
+        return;
+    }
+
+    aux->next = current->next;
+    current->next = NULL;
+    free(current);
+    current = NULL;
+    aux = NULL;
 }
 
 void remove_in_order(LinkedList* list, int value) {
@@ -161,4 +183,8 @@ SearchContent* search(LinkedList* list, int value) {
     content->prev = prev;
 
     return content;
+}
+
+void invert(LinkedList* list) {
+
 }

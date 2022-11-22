@@ -4,28 +4,17 @@
 #include "src/stack/stack.h"
 
 void main() {
-    DoublyLinkedList* dlist = new_DoublyLinkedList();
-    dpush_front(dlist, 4);
-    dpush_front(dlist, 2);
-    dpush_front(dlist, 1);
-    d_insert(dlist, 1);
-    d_insert(dlist, 5);
-    d_insert(dlist, 3);
-    d_insert(dlist, 40);
+    LinkedList* list = new_List();
+    
+    push_front(list, 10);
+    push_front(list, 100);
+    push_front(list, 40);
+    push_front(list, 8);
+    push_back(list, -10);
 
-    for (int i = 0; i < 3; i++) dpop_front(dlist);
+    remove_element(list, 40);
+    remove_element(list, 10);
+    remove_element(list, -10);
 
-    d_insert(dlist, 15);
-    d_insert(dlist, 10);
-    d_insert(dlist, 20);
-    d_insert(dlist, 9);
-
-    print_doubly_linked_list(dlist);
-
-    d_remove(dlist, 20);
-    d_remove(dlist, 100);
-    d_remove(dlist, 4);
-
-    print_doubly_linked_list(dlist);
-
+    print_list(list);
 }
