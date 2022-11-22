@@ -89,6 +89,10 @@ int pop_back(LinkedList* list) {
     return value;
 }
 
+void remove_element(LinkedList* list, int value) {
+    
+}
+
 void remove_in_order(LinkedList* list, int value) {
     SearchContent* content = search(list, value);
 
