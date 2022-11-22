@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../node.h"
+#include "../stack/stack.h"
 
 typedef struct {
     Node* head;

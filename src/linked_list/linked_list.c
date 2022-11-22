@@ -186,5 +186,18 @@ SearchContent* search(LinkedList* list, int value) {
 }
 
 void invert(LinkedList* list) {
+    Stack* stack = new_Stack();
+    Node* current = list->head;
 
+    while (current != NULL) {
+        push(stack, current->data);
+        current = current->next;
+    }
+
+    current = list->head;
+
+    while (current != NULL) {
+        current->data = pop(stack);
+        current = current->next;
+    }
 }

@@ -5,16 +5,12 @@
 
 void main() {
     LinkedList* list = new_List();
-    
-    push_front(list, 10);
-    push_front(list, 100);
-    push_front(list, 40);
-    push_front(list, 8);
-    push_back(list, -10);
 
-    remove_element(list, 40);
-    remove_element(list, 10);
-    remove_element(list, -10);
+    for (int i = 0; i < 11; i++) {
+        push_front(list, i);
+    }
+
+    invert(list);
 
     print_list(list);
 }
