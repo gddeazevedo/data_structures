@@ -63,6 +63,11 @@ void print_queue(Queue* queue);            // Mostra os elementos da fila
 ### [Funções](./src/linked_list/linked_list.h):
 
 ```c
+typedef struct {
+    Node* prev;
+    Node* current;
+} SearchContent;
+
 typedef struct __node {
     int data;              // valor
     struct __node* next;   // ponteiro para o próximo nó na lista
@@ -78,6 +83,9 @@ void print_list(LinkedList* list);                 // Mostra a lista
 void push_front(LinkedList* list, int value);      // Adiciona um elemento no início da lista
 void push_back(LinkedList* list, int value);       // Adiciona um elemento no final da lista
 void insert_in_order(LinkedList* list, int value); // Adiciona um elemento na posição correta numa lista ordenada de forma crescente
+SearchContent* search(LinkedList* list, int value); // Pesquisa por um item em uma lista encadeada ordenada
+void invert(LinkedList* list);                      // Inverte uma lista encadeada 
+void empty_list(LinkedList* list);                  // Esvazia uma lista encadeada
 ```
 
 ## 4 - Lista duplamente encadeada
