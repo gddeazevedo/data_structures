@@ -4,15 +4,14 @@
 #include "src/stack/stack.h"
 
 void main() {
-    LinkedList* list = new_List();
-
-    push_front(list, 1);
-    push_front(list, 2);
-    push_front(list, 4);
-    print_list(list);
-
-    invert(list);
-    // empty_list(list);
-
-    print_list(list);
+    DoublyLinkedList* list = new_DoublyLinkedList();
+    insert_in_order_in(list, 10);
+    insert_in_order_in(list, 3);
+    insert_in_order_in(list, 5);
+    remove_from(list, 5);
+    // insert_in_order_in(list, 5);
+    remove_from(list, 10);
+    remove_from(list, 3);
+    remove_from(list, 1);
+    print_doubly_linked_list(list);
 }
