@@ -1,110 +1,128 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
+// Using head node as auxiliar node
 
 typedef struct __node {
     int data;
     struct __node* next;
 } Node;
 
+typedef struct {
+    Node* current;
+    Node* prev;
+} SearchContent;
 
 typedef struct {
     Node* head;
 } LinkedList;
 
 
+LinkedList* new_LinkedList();
 void push_front(LinkedList* list, int value);
-void push_back(LinkedList* list, int value);
-void insert_in_order(LinkedList* list, int value);
+int pop_front(LinkedList* list);
+void insert_in(LinkedList* list, int value);
+void remove_from(LinkedList* list, int value);
+SearchContent* search(LinkedList* list, int value);
 void print_list(LinkedList* list);
 
-
 void main() {
-    LinkedList* list = (LinkedList*) malloc(sizeof(LinkedList));
-    list->head = NULL;
-
+    LinkedList* list = new_LinkedList();
     push_front(list, 10);
-    push_front(list, 9);
     push_front(list, 1);
-    push_back(list, 14);
-    push_back(list, 20);
-    push_back(list, 21);
-    push_back(list, 23);
-    push_front(list, 0);
-    insert_in_order(list, 12);
-    insert_in_order(list, 24);
-    insert_in_order(list, -10);
-    insert_in_order(list, 2);
-    print_list(list); // [ -10 0 1 2 9 10 12 14 20 21 23 24 ]
+    push_front(list, 2);
+    pop_front(list);
+    insert_in(list, 3);
+    insert_in(list, 2);
+    insert_in(list, 9);
+    insert_in(list, 11);
+    insert_in(list, 9);
+    remove_from(list, 2);
+    remove_from(list, 11);
+    print_list(list);
+}
+
+LinkedList* new_LinkedList() {
+    LinkedList* list = (LinkedList*) malloc(sizeof(LinkedList));
+    list->head = (Node*) malloc(sizeof(Node));
+    list->head->next = NULL;
+    return list;
 }
 
 void push_front(LinkedList* list, int value) {
-    Node* aux = (Node*) malloc(sizeof(Node));
-    aux->data = value;
-    aux->next = list->head;
-    list->head = aux;
-    aux = NULL;
+    Node* new_node = (Node*) malloc(sizeof(Node));
+    new_node->data = value;
+    new_node->next = list->head->next;
+    list->head->next = new_node;
 }
 
-void push_back(LinkedList* list, int value) {
-    if (list->head == NULL) {
-        list->head = (Node*) malloc(sizeof(Node));
-        list->head->data = value;
-        list->head->next = NULL;
-    } else {
-        Node* aux = list->head;
+int pop_front(LinkedList* list) {
+    Node* aux = list->head->next;
+    list->head->next = aux->next;
+    int value = aux->data;
+    free(aux);
+    return value;
+}
 
-        while (aux->next != NULL) {
+void insert_in(LinkedList* list, int value) {
+    SearchContent* content = search(list, value);
+    Node* current = content->current;
+    Node* prev = content->prev;
+    bool value_was_not_found = current == NULL; 
+
+    if (value_was_not_found) {
+        Node* new_node = (Node*) malloc(sizeof(Node));
+        new_node->data = value;
+        new_node->next = prev->next;
+        prev->next = new_node;
+    }
+}
+
+void remove_from(LinkedList* list, int value) {
+    SearchContent* content = search(list, value);
+    Node* current = content->current;
+    Node* prev = content->prev;
+    bool value_was_found = current != NULL;
+
+    if (value_was_found) {
+        prev->next = current->next;
+        free(current);
+    }
+}
+
+SearchContent* search(LinkedList* list, int value) {
+    Node* prev = list->head;
+    Node* aux = list->head->next;
+    Node* current = NULL;
+
+    while (aux != NULL) {
+        if (aux->data < value) {
+            prev = aux;
             aux = aux->next;
-        }
-
-        aux->next = (Node*) malloc(sizeof(Node));
-        aux->next->data = value;
-        aux->next->next = NULL;
-        aux = NULL;
-    }
-}
-
-void insert_in_order(LinkedList* list, int value) {
-    if (list->head == NULL) {
-        list->head = (Node*) malloc(sizeof(Node));
-        list->head->data = value;
-        list->head->next = NULL;
-    } else {
-        if (value <= list->head->data) {
-            push_front(list, value);
         } else {
-            Node* aux = list->head;
-
-            while (aux->next != NULL && value > aux->next->data) {
-                aux = aux->next;
+            if (aux->data == value) {
+                current = aux;
             }
-
-            if (aux->next == NULL) {
-                aux->next = (Node*) malloc(sizeof(Node));
-                aux->next->data = value;
-                aux->next->next = NULL;
-            } else {
-                Node* tmp = (Node*) malloc(sizeof(Node));
-                tmp->data = value;
-                tmp->next = aux->next;
-                aux->next = tmp;
-                tmp = NULL;
-            }
-
-            aux = NULL;
+            break;
         }
     }
+
+    SearchContent* content = (SearchContent*) malloc(sizeof(SearchContent));
+    content->current = current;
+    content->prev = prev;
+
+    return content;
 }
 
 void print_list(LinkedList* list) {
-    Node* aux = list->head;
+    Node* current = list->head->next;
 
     printf("[ ");
-
-    while (aux != NULL) {
-        printf("%d ", aux->data);
-        aux = aux->next;
+    
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
     }
 
     printf("]\n");
