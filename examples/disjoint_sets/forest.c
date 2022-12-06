@@ -11,7 +11,16 @@ int parents[L];
 int ranks[L];
 
 void main() {
+    make_set();
 
+    union_sets(3, 9);
+    union_sets(9, 1);
+
+    for (int i = 0; i < L; i++) {
+        printf("%d ", parents[i]);
+    }
+
+    printf("\n");
 }
 
 void make_set() {
