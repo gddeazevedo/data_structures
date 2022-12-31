@@ -23,11 +23,7 @@ static Node* search(char* key) {
 }
 
 int get(char* key) {
-    Node* current = table[hash(key)];
-
-    while (current != NULL && strcmp(current->key, key) != 0) {
-        current = current->next;
-    }
+    Node* current = search(key);
 
     if (current == NULL) return -1;
 
