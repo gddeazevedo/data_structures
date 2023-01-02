@@ -7,7 +7,7 @@ Stack* new_Stack() {
 }
 
 void push(Stack* stack, int value) {
-    Node* aux = (Node*) malloc(sizeof(Stack));
+    Node* aux = (Node*) malloc(sizeof(Node));
     aux->data = value;
     aux->next = stack->top;
     stack->top = aux;
